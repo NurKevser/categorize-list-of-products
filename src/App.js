@@ -1,35 +1,25 @@
-
-import axios from 'axios';
-import { useState } from 'react';
-import './App.scss';
-import Categorize from './components/Categorize';
-import Category from './components/Category';
-
+import axios from "axios";
+import { useState, useEffect } from "react";
+import "./App.scss";
+import Categorize from "./components/Categorize";
+import Category from "./components/Category";
 function App() {
-
-  const [products, setProducts] = useState([])
-  const [isCheck, setIsCheck] = useState(false);
-
-  // console.log(isCheck);
-
+  const [products, setProducts] = useState([]);
   const initilaizeProduct = () => {
-    axios.get('https://fakestoreapi.com/products')
+    axios
+      .get("https://fakestoreapi.com/products")
       .then((response) => setProducts(response.data))
-      .catch(error => console.log({ error }))
-    }
-    
-
-   
-  const handleChange = (e) => {
-    setIsCheck(!isCheck)
-}
-
+      .catch((error) => console.log({ error }));
+  };
+  useEffect(() => {
+    initilaizeProduct();
+  }, []);
+  
   return (
     <div className="App">
-      <Categorize products={products} isCheck={isCheck} handleChange={handleChange} initilaizeProduct={initilaizeProduct}  />
-      <Category products={products} isCheck={isCheck} />
+      <Categorize products={products} setProducts={setProducts} />
+      <Category products={products} />
     </div>
   );
 }
-
 export default App;
