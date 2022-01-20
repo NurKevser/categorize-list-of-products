@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+
+import axios from 'axios';
+import { useState } from 'react';
+import './App.scss';
+import Categorize from './components/Categorize';
+import Category from './components/Category';
 
 function App() {
+
+  const [products, setProducts] = useState([])
+  const [isCheck, setIsCheck] = useState(false);
+
+  // console.log(isCheck);
+
+  const initilaizeProduct = () => {
+    axios.get('https://fakestoreapi.com/products')
+      .then((response) => setProducts(response.data))
+      .catch(error => console.log({ error }))
+    }
+    
+
+   
+  const handleChange = (e) => {
+    setIsCheck(!isCheck)
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Categorize products={products} isCheck={isCheck} handleChange={handleChange} initilaizeProduct={initilaizeProduct}  />
+      <Category products={products} isCheck={isCheck} />
     </div>
   );
 }
