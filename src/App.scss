@@ -21,16 +21,15 @@
   @include border();
   padding: 1rem;
 
-
-    .addCat{
-        width: 100%;
-        border: none;
-        border-radius: 5px;
-        margin: 2px;
-        padding: 5px 30px;
-        background-color: dodgerblue;
-        color: #fff;
-    }
+  .addCat {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin: 2px;
+    padding: 5px 30px;
+    background-color: dodgerblue;
+    color: #fff;
+  }
 }
 .total {
   display: flex;
@@ -42,23 +41,21 @@
   margin-top: 1rem;
 }
 
-.card{
-    &-body{
-       &__content{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-       }
-    
-       .btn{
-           border: none;
-           margin: 2px;
-           padding: 5px 30px;
-           border-radius: 5px;
-       }
+.card {
+  &-body {
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
+
+    .btn {
+      border: none;
+      margin: 2px;
+      padding: 5px 30px;
+      border-radius: 5px;
+    }
+  }
 }
-
-
