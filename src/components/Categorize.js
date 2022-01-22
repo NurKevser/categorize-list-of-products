@@ -2,14 +2,14 @@ import React from "react";
 import "../styles/categorize.scss";
 
 const Categorize = ({ products, handleProduct }) => {
-  
+
 
   return (
     <div className="products">
       {products?.map((pro) => (
         <div key={pro.id} className="col-12">
           <input
-          className="form-input"
+            className="form-input"
             onChange={() => handleProduct(pro)}
             type="checkbox"
             checked={pro.isCheck}
