@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Category = ({data, addProducts}) => {
+const Category = ({data, addProducts, removeProducts}) => {
 
   const [count, setCount] = useState(1);
   const [newCategory, setNewCategory] = useState([
@@ -13,6 +13,10 @@ const Category = ({data, addProducts}) => {
     setCount(count + 1);
     setNewCategory([...newCategory, category]);
   };
+  const removeCategory = () => {
+    
+    setCount(count - 1)
+  }
 
 
   return (
@@ -34,10 +38,12 @@ const Category = ({data, addProducts}) => {
               <div className="actions-products">
                 <button className="btn" 
                 onClick={() => addProducts(item.title)}>Add Products</button>
-                <button className="btn">Remove Products</button>
+                <button className="btn"
+                onClick={() => removeProducts(item.title)}>Remove Products</button>
                 
               </div>
-              <button className="btn">Remove Category</button>
+              <button className="btn"
+              onClick={() => removeCategory()}>Remove Category</button>
               
             </div>
           </div>
