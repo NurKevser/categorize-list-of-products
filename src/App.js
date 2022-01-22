@@ -101,7 +101,7 @@ function App() {
             
       <Review products={products}
       newCategory={newCategory}
-      
+      data={data}
        />
     </div>
   );
