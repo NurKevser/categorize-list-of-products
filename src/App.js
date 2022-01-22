@@ -8,6 +8,8 @@ import Category from "./components/Category";
 function App() {
 
   const [products, setProducts] = useState([]);
+  const [data, setData] = useState({})
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const initilaizeProduct = async () => {
     await axios
@@ -19,7 +21,6 @@ function App() {
     initilaizeProduct();
   }, []);
 
-  const [data, setData] = useState({})
 
   // const onSelectItem = (id, add) => {
   //   let data = products.find(item => item.id === id)
@@ -30,8 +31,6 @@ function App() {
   //     setSelection(select)
   //   }
   // }
-
-  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const handleProduct = (pro) => {
     const filterProducts = products.filter((m) => m.id !== pro.id);
@@ -55,9 +54,17 @@ function App() {
   console.log("selectedPRODUCTS", selectedProducts);
 
   const addProducts = (categoryName) => {
+    console.log("cat name", categoryName);
     let d = {...data, [categoryName]: selectedProducts }
+    console.log("what d",d)
     setData(d)
+    
   }
+   const removeProducts = (categoryName) => {
+    let d = {...data, [categoryName]: [] }
+    console.log("new d",d)
+    setData(d)
+   }
 
   return (
     <div className="container">
@@ -72,6 +79,7 @@ function App() {
         <div className="col-6">
           <Category
             addProducts={addProducts}
+            removeProducts={removeProducts}
             data={data} />
         </div>
       </div>
