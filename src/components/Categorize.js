@@ -5,7 +5,7 @@ const Categorize = ({ products, handleProduct }) => {
   
 
   return (
-    <div className="row">
+    <div className="products">
       {products?.map((pro) => (
         <div key={pro.id} className="col-12">
           <input

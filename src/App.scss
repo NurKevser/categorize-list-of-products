@@ -1,4 +1,24 @@
-.container {
+@import "./styles/mixin.scss";
+
+.row {
     display: flex;
     justify-content: space-between;
+}
+
+.products {
+    width: 50vw;
+    height: 55vh;
+    padding: 1rem;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    @include border();
+}
+
+.category {
+    width: 20vw;
+    height: auto;
+    @include border();
+    padding: 1rem;
+    
 }

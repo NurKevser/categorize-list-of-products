@@ -55,14 +55,13 @@ function App() {
 
   const addProducts = (categoryName) => {
     console.log("cat name", categoryName);
-    let d = {...data, [categoryName]: selectedProducts }
+    let d = {[categoryName]: selectedProducts }
     console.log("what d",d)
     setData(d)
-    
   }
    const removeProducts = (categoryName) => {
     let d = {...data, [categoryName]: [] }
-    console.log("new d",d)
+    
     setData(d)
    }
 
@@ -70,7 +69,7 @@ function App() {
     <div className="container">
       <div className="row">
         <div className="col-6">
-          <Categorize
+          <Categorize 
             products={products}
             setProducts={setProducts}
             

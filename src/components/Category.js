@@ -8,20 +8,22 @@ const Category = ({data, addProducts, removeProducts}) => {
     { id: 1, title: `Category ${count}` },
   ]);
 
+  console.log("new Category", newCategory);
+
   const addNewCategory = () => {
     const category = { id: count + 1, title: `Category ${count + 1}` }
     setCount(count + 1);
     setNewCategory([...newCategory, category]);
   };
+  
   const removeCategory = () => {
     
-    setCount(count - 1)
   }
 
 
   return (
-    <div className="">
-      {newCategory.map((item, i) => (
+    <div className="category">
+      {newCategory.map((item) => (
         <div className="card mb-3" key={item.id}>
           <div className="card-header">
             <h3 className="">{item.title} </h3>
