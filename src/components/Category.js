@@ -8,33 +8,36 @@ const Category = ({data, addProducts, removeProducts}) => {
     { id: 1, title: `Category ${count}` },
   ]);
 
-  console.log("new Category", newCategory);
-
   const addNewCategory = () => {
     const category = { id: count + 1, title: `Category ${count + 1}` }
     setCount(count + 1);
     setNewCategory([...newCategory, category]);
   };
-  
-  const removeCategory = () => {
-    
+
+
+  const removeCategory = (title) => {
+    if(newCategory.length > 1){
+      setCount(count - 1)
+      const categor =  newCategory.filter(item => item.title !== title)
+      setNewCategory(categor)
+      removeProducts(title)
+    }
   }
 
 
   return (
     <div className="category">
-      {newCategory.map((item) => (
+      {newCategory.map((item, i) => (
         <div className="card mb-3" key={item.id}>
           <div className="card-header">
             <h3 className="">{item.title} </h3>
           </div>
           <div className="card-body">
             <div className="d-flex flex-column align-items-center my-3">
-              <i className="far fa-heart mb-3"></i>
-              {data && data.hasOwnProperty(`${item.title}`) && data[`${item.title}`].length === 0 && <p className="">Select products to add here.</p>}
-              {data && data.hasOwnProperty(`${item.title}`) && data[`${item.title}`].length > 0 && data[`${item.title}`].map(d => {
+              
+              {data && data.hasOwnProperty(`${item.title}`) && data[`${item.title}`].length > 0 ? data[`${item.title}`].map(d => {
                 return <div key={d.id}> {d.title} </div>
-              })}
+              }): <div><i className="far fa-heart mb-3"></i><p className="">Select products to add here.</p></div>}
             </div>
             <div className="actions d-flex justify-content-between mt-5">
               <div className="actions-products">
@@ -45,7 +48,7 @@ const Category = ({data, addProducts, removeProducts}) => {
                 
               </div>
               <button className="btn"
-              onClick={() => removeCategory()}>Remove Category</button>
+              onClick={() => removeCategory(item.title)}>Remove Category</button>
               
             </div>
           </div>

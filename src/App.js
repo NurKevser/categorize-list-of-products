@@ -22,22 +22,12 @@ function App() {
   }, []);
 
 
-  // const onSelectItem = (id, add) => {
-  //   let data = products.find(item => item.id === id)
-  //   if (add) setSelection(item => item.push(data))
-  //   else {
-  //     const ind = selection.findIndex(item => item.id === id)
-  //     const select = selection.splice(select, 0)
-  //     setSelection(select)
-  //   }
-  // }
-
   const handleProduct = (pro) => {
     const filterProducts = products.filter((m) => m.id !== pro.id);
     const filteredThisProduct = { ...pro, isCheck: !pro.isCheck }
     setProducts([filteredThisProduct, ...filterProducts])
   };
-  
+
   useEffect(() => {
     if (products) {
       products.forEach((item) => {
@@ -51,28 +41,34 @@ function App() {
     setSelectedProducts(filterProducts);
   }, [products]);
 
-  console.log("selectedPRODUCTS", selectedProducts);
 
   const addProducts = (categoryName) => {
-    console.log("cat name", categoryName);
-    let d = {[categoryName]: selectedProducts }
-    console.log("what d",d)
+    let d;
+    if(data[categoryName]) d = { ...data, [categoryName]: [ ...data[categoryName], ...selectedProducts] }
+    else d={ ...data, [categoryName]: selectedProducts }
+    let ids =  selectedProducts.map(selected => selected.id)
+    const pr = products.filter(product => !ids.includes(product.id))
+    setProducts(pr)
     setData(d)
   }
-   const removeProducts = (categoryName) => {
-    let d = {...data, [categoryName]: [] }
-    
+
+  const removeProducts = (categoryName) => {
+    let d = { ...data, [categoryName]: [] }
+    const prod = [...data[categoryName], ...products]
+    setProducts(prod)
     setData(d)
-   }
+  }
+
+  
+
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-6">
-          <Categorize 
+          <Categorize
             products={products}
             setProducts={setProducts}
-            
             handleProduct={handleProduct} />
         </div>
         <div className="col-6">
