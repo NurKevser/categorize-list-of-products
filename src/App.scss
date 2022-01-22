@@ -1,24 +1,64 @@
 @import "./styles/mixin.scss";
 
 .row {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .products {
-    width: 50vw;
-    height: 55vh;
-    padding: 1rem;
-    flex-wrap: wrap;
-    display: flex;
-    flex-direction: column;
-    @include border();
+  width: 70vw;
+  height: 55vh;
+  padding: 1rem;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  @include border();
 }
 
 .category {
-    width: 20vw;
-    height: auto;
-    @include border();
-    padding: 1rem;
-    
+  width: 20vw;
+  height: auto;
+  @include border();
+  padding: 1rem;
+
+
+    .addCat{
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        margin: 2px;
+        padding: 5px 30px;
+        background-color: dodgerblue;
+        color: #fff;
+    }
 }
+.total {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  @include border();
+  width: 70vw;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+.card{
+    &-body{
+       &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+       }
+    
+       .btn{
+           border: none;
+           margin: 2px;
+           padding: 5px 30px;
+           border-radius: 5px;
+       }
+    }
+}
+
+

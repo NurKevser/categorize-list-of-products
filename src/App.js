@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./App.scss";
 import Categorize from "./components/Categorize";
 import Category from "./components/Category";
+import Review from "./components/Review";
 
 
 function App() {
@@ -10,6 +11,13 @@ function App() {
   const [products, setProducts] = useState([]);
   const [data, setData] = useState({})
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [count, setCount] = useState(1);
+  const [newCategory, setNewCategory] = useState([
+    { id: 1, title: `Category ${count}` },
+  ]);
+
+  console.log("data",data);
+  
 
   const initilaizeProduct = async () => {
     await axios
@@ -40,24 +48,31 @@ function App() {
     const filterProducts = products.filter((m) => m.isCheck === true);
     setSelectedProducts(filterProducts);
   }, [products]);
+   
+  console.log("selectedPRODUCTS", selectedProducts);
 
 
   const addProducts = (categoryName) => {
     let d;
     if(data[categoryName]) d = { ...data, [categoryName]: [ ...data[categoryName], ...selectedProducts] }
     else d={ ...data, [categoryName]: selectedProducts }
-    let ids =  selectedProducts.map(selected => selected.id)
-    const pr = products.filter(product => !ids.includes(product.id))
-    setProducts(pr)
-    setData(d)
+    let ids =  selectedProducts.map(selected => selected.id);
+    const pr = products.filter(product => !ids.includes(product.id));
+    setProducts(pr);
+    setData(d);
   }
-
   const removeProducts = (categoryName) => {
     let d = { ...data, [categoryName]: [] }
     const prod = [...data[categoryName], ...products]
     setProducts(prod)
     setData(d)
   }
+  
+  const addNewCategory = () => {
+    const category = { id: count + 1, title: `Category ${count + 1}` }
+    setCount(count + 1);
+    setNewCategory([...newCategory, category]);
+  };
 
   
 
@@ -75,9 +90,19 @@ function App() {
           <Category
             addProducts={addProducts}
             removeProducts={removeProducts}
-            data={data} />
+            data={data} 
+            setCount={setCount}
+            count={count}
+            newCategory={newCategory}
+            setNewCategory={setNewCategory}
+            addNewCategory={addNewCategory} />
         </div>
       </div>
+            
+      <Review products={products}
+      newCategory={newCategory}
+      
+       />
     </div>
   );
 }
